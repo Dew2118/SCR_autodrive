@@ -74,6 +74,8 @@ class Autodrive:
             # if need to change the current speed then change the current speed (meaning by actually pressing w or s)
             if self.need_change_current_speed():
                 self.engine.change_current_speed(self.screen_shot.get_current_speed(), self.determine_following_speed())
+            #Check whether the time for holding down w or s is up, if it is up then release the key.
+            self.engine.check_and_release_key()
             # print(datetime.now()-before_start_timestamp)
             # break
 

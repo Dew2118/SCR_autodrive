@@ -200,3 +200,13 @@ Dew's note
 
 ## TODO:
 * remove the mixed value from self.cache['distance_till_next_station'] and ~~best_num in get_min_of_values()~~
+
+3/28/2022
+### engine.py
+======
+Dew's note
+* branch out to try to use datetime and timedelta to govern time instead of using sleep
+    -   Every time a speed change is commanded, create a self.last_timestamp with datetime.now() and self.time = timedelta(time that you want the key to be pressed). Check that if datetime.now()-self.last_timestamp >= self.time: then release the keys.
+    -   Make self.time = None in __init__ 
+            if it's None meaning there're no other key command, then the code can write key command
+            if datetime.now()-self.last_timestamp >= self.time: then release the keys and self.time = None
