@@ -61,11 +61,6 @@ class ScreenShot:
         self.close_doors1_image = cv2.imread('need_to_load_passenger_or_close_doors/close_doors1.png')
         self.close_doors2_image = cv2.imread('need_to_load_passenger_or_close_doors/close_doors2.png')
         self.guard_buzzer1_image = cv2.imread('need_to_load_passenger_or_close_doors/guard_buzzer1.png')
-        # self.max_first_num_error = {i:0 for i in range(11)}
-        # self.min_second_num_error = {i:999999999 for i in range(11)}
-        # self.max_err = 0
-        
-
 
     def remove_all_cache(self):
         self.cache = {}
@@ -110,14 +105,12 @@ class ScreenShot:
 
     def is_approaching_station(self):
         if 'is_approaching_station' not in self.cache:
-            distance = self.get_distance_till_next_station()
-            print(distance)
-            self.cache['is_approaching_station'] = (distance is not False) and (distance <= 0.2)
+            self.cache['is_approaching_station'] = (self.get_distance_till_next_station() <= 0.2)
         return self.cache['is_approaching_station']
 
     def is_at_station(self):
         if 'is_at_station' not in self.cache:
-            self.cache['is_at_station'] = (self.get_distance_till_next_station() is not False) and (self.get_distance_till_next_station() == 0.0)
+            self.cache['is_at_station'] = (self.get_distance_till_next_station() == 0.0)
         return self.cache['is_at_station']
 
     def get_position_for_getting_distance_num(self,expression):
@@ -140,7 +133,6 @@ class ScreenShot:
                 distance += self.get_min_of_values(self.get_position_for_getting_distance_num('num_size'))
                 distance += 10*self.get_min_of_values(self.get_position_for_getting_distance_num('0'))
                 distance += 0.01*self.get_min_of_values(self.get_position_for_getting_distance_num('num_size+num_size+dot_size+num_size'))
-            # print(distance)
             self.cache['distance_till_next_station'] = distance
         return self.cache['distance_till_next_station']
 
@@ -156,18 +148,7 @@ class ScreenShot:
             if similarity_score < min_similarity_score:
                 min_similarity_score = similarity_score
                 best_num = num
-                # if best_num == 10: 
-                #     best_num = 'no_tens_digit'
-                # min = [num,float(result)]
 
-        # err_list.sort()
-        # self.max_first_num_error[err_list[0][1]] = max(self.max_first_num_error[err_list[0][1]], err_list[0][0])
-        # self.min_second_num_error[err_list[1][1]] = min(self.min_second_num_error[err_list[1][1]], err_list[1][0])
-        # self.max_err = max(min_similarity_score, self.max_err) 
-        # print(min)
-        # print(self.max_err)
-        # print(self.max_first_num_error)
-        # print(self.min_second_num_error)
         return best_num
 
     #one use
