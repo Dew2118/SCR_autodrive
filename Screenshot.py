@@ -132,48 +132,21 @@ class ScreenShot:
             distance = 0
             #if the distance is x.xx instead of xx.xx
             if self.get_min_of_values(self.get_position_for_getting_distance_num('num_size+num_size+dot_size+num_size')) == 10:
-                # check the x.Xx
                 distance += 0.1*self.get_min_of_values(self.get_position_for_getting_distance_num('num_size+dot_size'))
-                if distance <= 0.2:
-                    # check the X.xx
-                    distance += self.get_min_of_values(self.get_position_for_getting_distance_num('0'))
-                    if distance <= 0.2:
-                        #check the x.xX
-                        distance += 0.01*self.get_min_of_values(self.get_position_for_getting_distance_num('num_size+dot_size+num_size'))
-                        if distance > 0.2:
-                            distance = False
-                    else:
-                        distance = False
-                else:
-                    distance = False
+                distance += self.get_min_of_values(self.get_position_for_getting_distance_num('0'))
+                distance += 0.01*self.get_min_of_values(self.get_position_for_getting_distance_num('num_size+dot_size+num_size'))
             else:
-                # check the xx.Xx
                 distance += 0.1*self.get_min_of_values(self.get_position_for_getting_distance_num('num_size+num_size+dot_size'))
-                if distance <= 0.2:
-                    # check the xX.xx
-                    distance += self.get_min_of_values(self.get_position_for_getting_distance_num('num_size'))
-                    if distance <= 0.2:
-                        # check the Xx.xx
-                        distance += 10*self.get_min_of_values(self.get_position_for_getting_distance_num('0'))
-                        if distance <= 0.2:
-                            # check the xx.xX
-                            distance += 0.01*self.get_min_of_values(self.get_position_for_getting_distance_num('num_size+num_size+dot_size+num_size'))
-                            if distance > 0.2:
-                                distance = False
-                        else:
-                            distance = False
-                    else:
-                        distance = False
-                else:
-                    distance = False
-            #change to tens digit
-            print(distance)
+                distance += self.get_min_of_values(self.get_position_for_getting_distance_num('num_size'))
+                distance += 10*self.get_min_of_values(self.get_position_for_getting_distance_num('0'))
+                distance += 0.01*self.get_min_of_values(self.get_position_for_getting_distance_num('num_size+num_size+dot_size+num_size'))
+            # print(distance)
             self.cache['distance_till_next_station'] = distance
         return self.cache['distance_till_next_station']
 
     def get_min_of_values(self,mon):
         # min = [0,100000000]
-
+        print(mon)
         min_similarity_score = 100000000
         err_list = []
         best_num = None

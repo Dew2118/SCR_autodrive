@@ -51,6 +51,7 @@ class Autodrive:
             result = min(45,self.screen_shot.get_speed_limit())  
         return result
 
+    # @profile
     def start(self):
         while True:
             self.screen_shot.capture()
@@ -68,12 +69,14 @@ class Autodrive:
             if self.screen_shot.need_close_door(self.screen_shot.get_signal_aspect()):
                 self.engine.close_door()
                 self.loading_passenger = False   
+            current_speed = self.screen_shot.get_current_speed()
+            following_speed = self.determine_following_speed()
 
             # self.print_train_info()
             #Determine following_speed from approaching station, signal aspect and speed limit then change the following_speed accrodingly
             # if need to change the current speed then change the current speed (meaning by actually pressing w or s)
             if self.need_change_current_speed():
-                self.engine.change_current_speed(self.screen_shot.get_current_speed(), self.determine_following_speed())
+                self.engine.change_current_speed(current_speed,following_speed)
             #Check whether the time for holding down w or s is up, if it is up then release the key.
             self.engine.check_and_release_key()
             # print(datetime.now()-before_start_timestamp)

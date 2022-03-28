@@ -6,7 +6,7 @@ class Engine:
         self.top_speed = top_speed
         self.last_timestamp = datetime.now()
         self.time = None
-
+    
     def increase_speed(self,amount):
         if self.time == None:
             keyboard.press('w')
