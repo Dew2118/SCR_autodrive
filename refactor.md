@@ -211,5 +211,12 @@ Dew's note
             if it's None meaning there're no other key command, then the code can write key command
             if datetime.now()-self.last_timestamp >= self.time: then release the keys and self.time = None
 
+### Screenshot.py
 * Clean up get_distance_till_next_station() just slightly slower, I think it's worth it.
 * Remove other places that check for self.cache['distance_till_next_station'] ==  False or self.cache['distance_till_next_station'] != False
+
+### Main.py
+* Rewrite Determine_following_speed() so that: if the signal is single then result = 45 mph or speed limit whichever is lower, 
+if the signal is red and the signal IS the platform starting signal then result = 45 mph or speed limit whichever is lower, if the signal is red and the signal is NOT the platform starting signal then result = 0 mph,
+if the signal isn't red or yellow, and IS approaching station then result = 45 mph or speed limit whichever is lower,
+if the signal isn't red or yellow, and is NOT approaching station then result = speed limit

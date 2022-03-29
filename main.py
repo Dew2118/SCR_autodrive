@@ -36,22 +36,26 @@ class Autodrive:
 
     def determine_following_speed(self):
         """Determine following speed based on signal aspect and approaching station."""
-        # first we determine from signal aspect
-        if self.screen_shot.get_signal_aspect() in ['green','white','double yellow']:
-           result = self.screen_shot.get_speed_limit()
-        elif self.screen_shot.get_signal_aspect() == 'yellow':
+        # If the signal is single yellow, result = 45 mph or speed limit which ever is lower
+        if self.screen_shot.get_signal_aspect() == 'yellow':
            result = min(45,self.screen_shot.get_speed_limit())
         elif self.screen_shot.get_signal_aspect() == 'red':
-           result = 0
+            #If the red signal is platform starting signal then result = 45 mph or speed limit what ever is lower
+            if self.engine.is_signal_a_platform_starting_signal() and self.screen_shot.is_approaching_station():
+                result = min(45,self.screen_shot.get_speed_limit())
+            else:
+                #If the red signal is anywhere else then result = 0
+                result = 0
+        # If the signal is double yellow, green, white, or out then result = 45 mph or speed limit what ever is lower
+        elif self.screen_shot.is_approaching_station():
+            result = min(45,self.screen_shot.get_speed_limit()) 
+        # If the signal is double yellow, green, white, or out and the train isn't approaching a station then the speed limit can be speed_limit
         else:
            result = self.screen_shot.get_speed_limit()
-        # then we consider approaching status and this has higher priority than signal aspect
-        # if approaching station, the speed must be less than 45
-        if self.screen_shot.is_approaching_station():
-            result = min(45,self.screen_shot.get_speed_limit())  
+        
         return result
 
-    # @profile
+    @profile
     def start(self):
         while True:
             self.screen_shot.capture()
@@ -80,7 +84,7 @@ class Autodrive:
             #Check whether the time for holding down w or s is up, if it is up then release the key.
             self.engine.check_and_release_key()
             # print(datetime.now()-before_start_timestamp)
-            # break
+            break
 
 if __name__=='__main__':            
     top_speed = int(argv[1])

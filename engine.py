@@ -42,8 +42,12 @@ class Engine:
         keyboard.press_and_release('t')
 
     def change_current_speed(self, current_speed, following_speed):
+        # print(current_speed,following_speed)
         speed_difference = following_speed - current_speed
         if speed_difference > 0:
             self.increase_speed(speed_difference)
         elif speed_difference < 0:
             self.decrease_speed(abs(speed_difference))
+
+    def is_signal_a_platform_starting_signal(self):
+        return (keyboard.is_pressed('shift'))
