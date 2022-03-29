@@ -210,3 +210,6 @@ Dew's note
     -   Make self.time = None in __init__ 
             if it's None meaning there're no other key command, then the code can write key command
             if datetime.now()-self.last_timestamp >= self.time: then release the keys and self.time = None
+
+* Clean up get_distance_till_next_station() just slightly slower, I think it's worth it.
+* Remove other places that check for self.cache['distance_till_next_station'] ==  False or self.cache['distance_till_next_station'] != False
