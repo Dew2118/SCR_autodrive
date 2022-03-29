@@ -55,7 +55,7 @@ class Autodrive:
         
         return result
 
-    @profile
+    # @profile
     def start(self):
         while True:
             self.screen_shot.capture()
@@ -84,7 +84,7 @@ class Autodrive:
             #Check whether the time for holding down w or s is up, if it is up then release the key.
             self.engine.check_and_release_key()
             # print(datetime.now()-before_start_timestamp)
-            break
+            # break
 
 if __name__=='__main__':            
     top_speed = int(argv[1])

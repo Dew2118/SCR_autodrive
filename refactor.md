@@ -220,3 +220,6 @@ Dew's note
 if the signal is red and the signal IS the platform starting signal then result = 45 mph or speed limit whichever is lower, if the signal is red and the signal is NOT the platform starting signal then result = 0 mph,
 if the signal isn't red or yellow, and IS approaching station then result = 45 mph or speed limit whichever is lower,
 if the signal isn't red or yellow, and is NOT approaching station then result = speed limit
+
+### Requirements.txt
+* Edit and add requirements

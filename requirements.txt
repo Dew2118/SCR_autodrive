@@ -1,6 +1,7 @@
 ## Dependent modules without specifying version
 keyboard
-pytesseract
-mss
+datetime
 numpy
+cv2
+collections
 pyautogui
