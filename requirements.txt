@@ -1,7 +1,5 @@
 ## Dependent modules without specifying version
 keyboard
-datetime
 numpy
 cv2
-collections
 pyautogui
