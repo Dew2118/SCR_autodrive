@@ -58,9 +58,11 @@ class ScreenShot:
         # cache other images for comparison
         self.ready_to_load1_image = cv2.imread('need_to_load_passenger_or_close_doors/ready_to_load1.png')
         self.ready_to_load2_image = cv2.imread('need_to_load_passenger_or_close_doors/ready_to_load2.png')
+        self.ready_to_load3_image = cv2.imread('need_to_load_passenger_or_close_doors/ready_to_load3.png')
         self.close_doors1_image = cv2.imread('need_to_load_passenger_or_close_doors/close_doors1.png')
         self.close_doors2_image = cv2.imread('need_to_load_passenger_or_close_doors/close_doors2.png')
         self.guard_buzzer1_image = cv2.imread('need_to_load_passenger_or_close_doors/guard_buzzer1.png')
+        self.guard_buzzer2_image = cv2.imread('need_to_load_passenger_or_close_doors/guard_buzzer2.png')
 
     def remove_all_cache(self):
         self.cache = {}
@@ -155,7 +157,8 @@ class ScreenShot:
     def need_load_passenger_action(self):
         mon = [820,30,830,300]
         return ((self.compare_to_existing_image(self.ready_to_load1_image, mon, 200) < SIMILARITY_THRESHOLD) or \
-            (self.compare_to_existing_image(self.ready_to_load2_image,mon, 200)) < SIMILARITY_THRESHOLD)
+            (self.compare_to_existing_image(self.ready_to_load2_image,mon, 200) < SIMILARITY_THRESHOLD) or \
+            (self.compare_to_existing_image(self.ready_to_load3_image,mon, 200) < SIMILARITY_THRESHOLD))
 
     #one use
     def need_close_door(self, under_signal_restriction):
@@ -163,7 +166,8 @@ class ScreenShot:
         return under_signal_restriction != 'red' and \
             ((self.compare_to_existing_image(self.close_doors1_image, mon, 200) < 5000) or \
             (self.compare_to_existing_image(self.close_doors2_image, mon, 200) < 5000) or \
-            (self.compare_to_existing_image(self.guard_buzzer1_image, mon, 200) < 5000))
+            (self.compare_to_existing_image(self.guard_buzzer1_image, mon, 200) < 5000) or \
+            (self.compare_to_existing_image(self.guard_buzzer2_image, mon, 200) < 5000))
     
     def get_speed_limit(self):
         if 'speed_limit' not in self.cache:

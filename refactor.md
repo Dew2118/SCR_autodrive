@@ -223,3 +223,7 @@ if the signal isn't red or yellow, and is NOT approaching station then result = 
 
 ### Requirements.txt
 * Edit and add requirements
+
+4/3/2022
+### Screenshot.py
+* Add guard related image similarity images, including need loaing passenger and need close doors
